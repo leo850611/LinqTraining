@@ -86,16 +86,6 @@ namespace LinqSample.WithoutLinq
 				}
 				index += 1;
 			}
-
-
-			//foreach (var employee in employees)
-			//{
-			//	if (index >= t)
-			//	{
-			//		yield return employee;
-			//	}
-			//	index += 1;
-			//}
 		}
 
 	}
