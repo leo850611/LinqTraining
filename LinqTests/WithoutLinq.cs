@@ -88,5 +88,25 @@ namespace LinqSample.WithoutLinq
 			}
 		}
 
+
+		public static IEnumerable<T> YourTakeWhile<T>(this IEnumerable<T> employees, int i, Func<T, bool> func)
+		{
+			int index = 0;
+			var enumerator = employees.GetEnumerator();
+			while (enumerator.MoveNext())
+			{
+				var result = enumerator.Current;
+				if (index>i)
+				{
+					yield break;
+				}
+
+				if (func(enumerator.Current))
+				{
+					yield return result;
+					index++;
+				}
+			}
+		}
 	}
 }
