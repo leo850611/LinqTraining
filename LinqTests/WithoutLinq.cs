@@ -96,7 +96,7 @@ namespace LinqSample.WithoutLinq
 			while (enumerator.MoveNext())
 			{
 				var result = enumerator.Current;
-				if (index>i)
+				if (index > i)
 				{
 					yield break;
 				}
@@ -105,6 +105,24 @@ namespace LinqSample.WithoutLinq
 				{
 					yield return result;
 					index++;
+				}
+			}
+		}
+
+		public static IEnumerable<T> SkipWhile<T>(IEnumerable<T> employees, int i, Func<T, bool> func)
+		{
+			int index = 0;
+			var enumerator = employees.GetEnumerator();
+			while (enumerator.MoveNext())
+			{
+				var result = enumerator.Current;
+				if (func(result) && index < i)
+				{
+					index++;
+				}
+				else
+				{
+					yield return result;
 				}
 			}
 		}
