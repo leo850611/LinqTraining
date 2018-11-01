@@ -77,14 +77,25 @@ namespace LinqSample.WithoutLinq
 		internal static IEnumerable<T> YourSkip<T>(this IEnumerable<T> employees, int t)
 		{
 			int index = 0;
-			foreach (var employee in employees)
+			var enumerator = employees.GetEnumerator();
+			while (enumerator.MoveNext())
 			{
 				if (index >= t)
 				{
-					yield return employee;
+					yield return enumerator.Current;
 				}
 				index += 1;
 			}
+
+
+			//foreach (var employee in employees)
+			//{
+			//	if (index >= t)
+			//	{
+			//		yield return employee;
+			//	}
+			//	index += 1;
+			//}
 		}
 
 	}
