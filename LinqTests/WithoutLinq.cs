@@ -73,5 +73,19 @@ namespace LinqSample.WithoutLinq
 			}
 		}
 
+
+		internal static IEnumerable<T> YourSkip<T>(this IEnumerable<T> employees, int t)
+		{
+			int index = 0;
+			foreach (var employee in employees)
+			{
+				if (index >= t)
+				{
+					yield return employee;
+				}
+				index += 1;
+			}
+		}
+
 	}
 }

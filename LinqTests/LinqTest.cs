@@ -122,18 +122,19 @@ namespace LinqTests
             expected.ToExpectedObject().ShouldEqual(act.ToList());
         }
 
-        [Ignore]
         [TestMethod]
         public void Skip()
         {
             var employees = RepositoryFactory.GetEmployees();
-            var expected = new List<Employee>
+	        var act = employees.YourSkip(6);
+
+			var expected = new List<Employee>
             {
                 new Employee {Name = "Frank", Role = RoleType.Engineer, MonthSalary = 120, Age = 16, WorkingYear = 2.6},
                 new Employee {Name = "Joey", Role = RoleType.Engineer, MonthSalary = 250, Age = 40, WorkingYear = 2.6},
             };
 
-            //expected.ToExpectedObject().ShouldEqual(act.ToList());
+            expected.ToExpectedObject().ShouldEqual(act.ToList());
         }
 
         [Ignore]
