@@ -126,5 +126,35 @@ namespace LinqSample.WithoutLinq
 				}
 			}
 		}
+
+		public static IEnumerable<int> YourGroup<T>(IEnumerable<T> employees, int i, Func<T, int> func)
+		{
+			int index = 0;
+			var temp = 0;
+			var enumerator = employees.GetEnumerator();
+			while (enumerator.MoveNext())
+			{
+				var result = enumerator.Current;
+				if (index < i)
+				{
+					temp += int.Parse(func(result).ToString());
+					index++;
+				}
+
+				if (index == i)
+				{
+					yield return temp;
+					index = 0;
+					temp = 0;
+				}
+			}
+
+			if (index != 0)
+			{
+				yield return temp;
+			}
+		}
+
+
 	}
 }
