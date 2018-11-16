@@ -109,6 +109,40 @@ namespace LinqSample.WithoutLinq
 			}
 		}
 
+		public static T YourFirst<T>(this IEnumerable<T> employees, Func<T, bool> func)
+		{
+			int index = 0;
+			var enumerator = employees.GetEnumerator();
+			while (enumerator.MoveNext())
+			{
+				return enumerator.Current;
+			}
+
+			return default(T);
+		}
+
+		public static T YourLast<T>(this IEnumerable<T> employees, Func<T, bool> func)
+		{
+			bool isFind = false;
+			var enumerator = employees.GetEnumerator();
+			var enumeratorCurrent = enumerator.Current;
+			while (enumerator.MoveNext())
+			{
+				if (func(enumerator.Current))
+				{
+					isFind = true;
+					enumeratorCurrent = enumerator.Current;
+				}
+			}
+
+			if (isFind)
+			{
+				return enumeratorCurrent;
+			}
+
+			return default(T);
+		}
+
 		public static IEnumerable<T> SkipWhile<T>(IEnumerable<T> employees, int i, Func<T, bool> func)
 		{
 			int index = 0;
